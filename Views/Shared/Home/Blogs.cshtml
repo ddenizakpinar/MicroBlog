@@ -1,0 +1,53 @@
+﻿@model CategoryPostModel
+
+<div class="row col-lg-10">
+
+    @foreach (var item in Model.posts)
+    {
+
+        <div class="card mb-12 col-lg-12" style="margin-bottom:1rem">
+            <img style="margin-top:1rem " src="~/img/@item.Image" width="450" height="450" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h1 class="card-title"><a href="/@item.user/post/@item.id">@item.title</a></h1>
+                @if (item.user.Id == ViewBag.User)
+                {
+
+            <h6>
+                Author: <a href="/@item.user">@item.user</a>   <button class="btn btn-danger my-2 my-sm-0"><a style="color:white" href="/Post/Edit/@item.id">Edit</a> </button>
+                <button class="btn btn-danger my-2 my-sm-0"> <a style="color:white" href="/Post/RemovePost/@item.id">Remove</a></button>
+            </h6>
+                  
+
+                }
+                else
+                {
+                    <h6>Author: <a href="/@item.user">@item.user</a></h6>
+                }
+                <p>Category: <a href="/Home/Category/@item.categoryId">@Model.categories.FirstOrDefault(i => i.id == item.categoryId).name</a></p>
+
+
+
+                @if (item.content.Length > 500)
+                {
+                    <p class="card-text">
+                        @Html.Raw(@item.content.Substring(0, 500))... <a style="font-weight:600;font-size:1.1rem" href="/@item.user/post/@item.id">
+                            Read more
+                        </a>
+                    </p>
+
+                }
+                else
+                {
+                    <p class="card-text">@Html.Raw(@item.content)</p>
+                }
+
+
+
+
+                <p class="card-text"><small class="text-muted">@item.DateTime</small></p>
+            </div>
+        </div>
+
+
+    }
+</div>

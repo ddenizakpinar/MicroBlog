@@ -1,0 +1,45 @@
+﻿@model CategoryPostModel
+@inject SignInManager<IdentityUser> SignInManager
+
+
+<div class="container">
+
+    <div class="blog-header">
+        @{
+            if (ViewBag.Title != null)
+            {
+                <h1 class="blog-title">@ViewBag.Title</h1>
+            }
+            else
+            {
+                <h1 class="blog-title">MicroBlog</h1>
+            }
+        }
+
+        <p class="lead blog-description">Bonum vinum lætificat cor hominum</p>
+    </div>
+
+
+
+
+
+</div>
+
+<div class="container">
+    <div class="row col-lg-2">
+        <div>
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a href="/" class="nav-link active" style="margin:.1rem" id="v-pills-home-tab" data-toggle="pill" role="tab" aria-controls="v-pills-home" aria-selected="true">All</a>
+
+                @foreach (var item in Model.categories)
+                {
+                    //<div style="margin:.1rem;color:aliceblue" class="nav-link active" id="v-pills-home-tab" data-toggle="pill" role="tab" aria-controls="v-pills-home" aria-selected="true">@Html.ActionLink(item.name, "Category", "Home", new { id = item.id }, null)</div>
+                    <a href="/Home/Category/@item.id" class="nav-link" style="margin:.1rem" id="v-pills-home-tab" data-toggle="pill" role="tab" aria-controls="v-pills-home" aria-selected="true">@item.name</a>
+                }
+
+            </div>
+        </div>
+
+    </div>
+    @Html.Partial("~/Views/Shared/Home/Blogs.cshtml", Model);
+</div>

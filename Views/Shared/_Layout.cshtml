@@ -1,0 +1,90 @@
+﻿@inject SignInManager<IdentityUser> SignInManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://getbootstrap.com/docs/3.3/examples/blog/">
+
+    <title>MicroBlog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <!-- Custom styles for this template -->
+
+    <link href="~/css/blog.css" rel="stylesheet" />
+    <script src="//cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding-right:25rem;padding-left:25rem;font-size:1.6rem;background-color:black!important">
+        <a class="navbar-brand" href="/" style="padding-top:.7rem;font-size:2.3rem">MicroBlog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Blogs <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Post" asp-action="addPost">Share</a>
+                </li>
+
+            </ul>
+            <form asp-action="Search" asp-controller="Home" class="form-inline">
+                <input class="form-control mr-sm-2" id="word" name="word"  type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-warning my-2 my-sm-0"  type="submit">Search</button>
+                <div style="padding-left:4.5rem;font-size:1.5rem">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+
+
+                        <a style="color:white;font-size:1.6rem;font-weight:bold;margin-right:1rem" href="/@User.Identity.Name">@User.Identity.Name</a>
+          
+                        <button class="btn btn-danger my-2 my-sm-0"> <a style="color:white" asp-action="Logout" asp-controller="Account">Logout</a></button>
+                    }
+                    else
+                    {
+
+                        <a asp-action="Login" asp-controller="Account">Login</a>
+                        <a asp-action="Register" asp-controller="Account">Register</a>
+
+                    }
+                </div>
+            </form>
+
+    </nav>
+
+    <!-- /.row -->
+   
+    @RenderBody()
+    <footer class="blog-footer">
+        <p>
+            <a href="#">Back to top</a>
+        </p>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="~/js/bootstrap.js"></script>
+
+</body>
+</html>
+

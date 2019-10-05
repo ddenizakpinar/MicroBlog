@@ -1,0 +1,71 @@
+﻿@model CategoryPostModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="blog-header">
+
+
+        <h1 class="blog-title">Edit Blog</h1>
+
+        <p class="lead blog-description">Bonum vinum lætificat cor hominum</p>
+    </div>
+
+    <hr />
+
+</div>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-10">
+            <form asp-action="Edit" enctype="multipart/form-data">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label>Image</label>
+                    <img src="~/img/@Model.post.Image" width="120" alt="" />
+
+                    <input type="file" name="file" id="file" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.post.title" class="control-label">Title</label>
+                    <input asp-for="@Model.post.title" class="form-control" />
+                    <span asp-validation-for="@Model.post.title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <textarea asp-for="@Model.post.content" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
+                </div>
+
+                <label>Category</label>
+                <select asp-for="@Model.post.categoryId">
+
+                    @foreach (var item in Model.categories)
+                    {
+                        <option value="@item.id">@item.name</option>
+                    }
+
+
+                </select>
+
+                <div class="form-group">
+                    <input type="submit" value="Edit Blog" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('editor1');
+    </script>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+</div>

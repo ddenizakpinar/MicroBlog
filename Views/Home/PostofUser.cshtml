@@ -1,0 +1,42 @@
+﻿
+@model MicroBlog.Models.Post
+
+@{
+    ViewData["Title"] = "Post";
+}
+
+<div class="container">
+
+
+    <div>
+
+
+        <div class="card mb-12 col-lg-12">
+
+            <h1 style="font-weight:bold;font-size:4rem">@Model.title</h1>
+         
+            <h6>Author: <a href="/@Model.user">@Model.user</a></h6>
+            <p class="card-text"><small class="text-muted">@Model.DateTime</small></p>
+            <img src="~/img/@Model.Image" style="margin-top:1rem" width="450" height="450" class="card-img-top" alt="...">
+
+
+            <div class="card-body">
+
+
+                <div style="font-size:1.5rem">
+                    @Html.Raw(@Model.content)
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    <div>
+
+        <a href="/">Back to List</a>
+    </div>
+</div>
+
+
+
